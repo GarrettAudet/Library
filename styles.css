@@ -3,8 +3,11 @@
     --secondary-color: #FFFCF2;
     --third-color: #CCC5B9;
     --font-size-header: 2rem;
+    --font-size-large: 1.5rem;
+    --font-size-normal: 1rem;
     --spacing-sm: 0vh;
     --spacing-md: 3vh;
+    --spacing-xl: 4rem;
     --padding-md: 10vh;
 }
 
@@ -30,9 +33,12 @@ header button {
     padding: 10px 20px;
 }
 
-button:hover {
-    background-color: var(--third-color); 
+button:hover, .book:hover {
     transform: scale(1.05); 
+}
+
+.button:hover {
+    background-color: var(--third-color); 
 }
 
 header {
@@ -64,4 +70,30 @@ main button {
     background: none;
     font-size: var(--font-size-header);
     padding: 20px 20px;
+}
+
+.book {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: var(--spacing-sm) var(--spacing-md); 
+    border-radius: 0.5rem;
+    padding: 1rem 0rem;
+}
+
+.book button:hover {
+    color: var(--third-color);
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    gap: var(--spacing-xl);
+    margin: 0px 16px;
+}
+
+main div button {
+    font-size: var(--font-size-large);
+    padding: 10px 10px;
+    margin: 0px;
+    color: var(--secondary-color);
 }
