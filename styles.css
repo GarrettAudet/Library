@@ -1,0 +1,67 @@
+:root {
+    --primary-color: #1F1F1F;
+    --secondary-color: #FFFCF2;
+    --third-color: #CCC5B9;
+    --font-size-header: 2rem;
+    --spacing-sm: 0vh;
+    --spacing-md: 3vh;
+    --padding-md: 10vh;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background-color: var(--secondary-color);
+    margin: 0;
+}
+
+button {
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: calc(var(--font-size-header) / 2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 0.5rem;
+}
+
+header button {
+    border: none;
+    padding: 10px 20px;
+}
+
+button:hover {
+    background-color: var(--third-color); 
+    transform: scale(1.05); 
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--primary-color); 
+    color: var(--secondary-color); 
+    padding: var(--spacing-sm) var(--spacing-md); 
+    align-items: center; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
+}
+
+header h1 {
+    font-size: var(--font-size-header);
+    margin: 0px;
+}
+
+h1, button {
+    margin: 16px;
+}
+
+main {
+    text-align: center;
+}
+
+main button {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: var(--font-size-header);
+    padding: 20px 20px;
+}
