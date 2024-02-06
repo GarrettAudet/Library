@@ -2,7 +2,7 @@ class Book {
     constructor (title, author, pages) {
         this.title = title;
         this.author = author;
-        this.pages = title;
+        this.pages = pages;
     }
 }
 
@@ -20,7 +20,7 @@ class Library {
     }
 
     removeBook(title) {
-        this.books.filter((book) => book.title !== title);
+        this.books = this.books.filter((book) => book.title !== title); 
     }
 
     getBook(title) {
@@ -39,10 +39,29 @@ class Library {
 }
 
 const myLibrary = new Library();
-let book1 = new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 223);
-let book2 = new Book("The Hobbit", "J.R.R. Tolkien", 310);
 
-myLibrary.addBook(book1);
-myLibrary.addBook(book2);
+// Get the modal
+var modal = document.getElementById("addBookModal");
 
-myLibrary.listBooks();  // Lists all books in the library
+// Get the button that opens the modal
+var btn = document.getElementById("addBookBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
