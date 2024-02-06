@@ -1,8 +1,9 @@
 class Book {
-    constructor (title, author, pages) {
+    constructor (title, author, pages, read) {
         this.title = title;
         this.author = author;
         this.pages = pages;
+        this.read = read;
     }
 }
 
@@ -38,30 +39,81 @@ class Library {
     }
 }
 
-const myLibrary = new Library();
+function populateGrid(books) {
+    const bookGrid = document.querySelector('.book-grid');
 
-// Get the modal
-var modal = document.getElementById("addBookModal");
+        // Clear the grid first to remove any existing books
+        bookGrid.innerHTML = '';
 
-// Get the button that opens the modal
-var btn = document.getElementById("addBookBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
+        // Loop over the array of books
+        books.forEach((book) => {
+            // Create a new div for each book and add class
+            const newBook = document.createElement('div');
+            newBook.classList.add('book');
+    
+            // Use the properties of the book to fill in the content
+            newBook.innerHTML = `
+                <p>Title: ${book.title}</p>
+                <p>Author: ${book.author}</p>
+                <p>Pages: ${book.pages}</p>
+                <button class="read">${book.read ? 'Read' : 'Not Read'}</button>
+                <button class="remove" data-title="${book.title}">Remove</button>
+            `;
+    
+            // Append the new book to the grid
+            bookGrid.appendChild(newBook);
+    
+            // Add event listener for the remove button
+            newBook.querySelector('.remove').addEventListener('click', (e) => {
+                // This assumes you have a method to remove a book from your library instance
+                myLibrary.removeBook(book.title);
+                // Repopulate the grid after removal
+                populateGrid(myLibrary.books);
+            });
+        });
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+document.addEventListener('DOMContentLoaded', () => {
+    // Setup New Library
+    const myLibrary = new Library();
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+    // Get Elements
+    var btn = document.querySelector(".add-book"); // Use querySelector to get the first element that matches the selector
+    const addBookForm = document.getElementById('addBookForm');
+    var modal = document.getElementById("addBookModal");    
+
+    // Display Form to Enter Book Information
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Retrieve Information from Form
+    addBookForm.addEventListener('submit', function(e) {
+
+        // Prevent Default Form Submission
+        e.preventDefault(); 
+
+        // Retrieve values from the form
+        const title = document.querySelector('input[name="title"]').value;
+        const author = document.querySelector('input[name="author"]').value;
+        const pages = document.querySelector('input[name="pages"]').value;
+        const read = document.querySelector('input[name="read"]').checked;
+
+        // Create New Book Element
+        const newBook = new Book(title, author, pages, read);
+
+        // Append Book
+        myLibrary.addBook(newBook);
+        myLibrary.listBooks();
+
+        // Close the modal after submission
+        const modal = document.getElementById('addBookModal');
+        modal.style.display = 'none';
+
+        // Update modal grid
+        populateGrid(myLibrary.books);
+
+        // Reset the Form
+        addBookForm.reset();
+    });
+});
