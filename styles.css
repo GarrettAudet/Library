@@ -99,6 +99,7 @@ main div button {
 }
 
 .modal {
+    display: none;
     position: fixed; 
     z-index: 1; 
     left: 0;
@@ -137,6 +138,10 @@ form input {
     font-size: var(--font-size-normal);
 }
 
+form input:hover {
+    background-color: var(--third-color);
+}
+
 form input::placeholder {
     color: var(--primary-color);
     opacity: 1;
@@ -160,4 +165,13 @@ form button {
     text-decoration: none;
     cursor: pointer;
 }
-  
+
+.submission-button {
+    background-color: var(--third-color);
+}
+
+.checkbox {
+    margin-top: 4px;
+    accent-color: white;
+    cursor: pointer;
+}
