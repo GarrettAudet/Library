@@ -39,6 +39,10 @@ class Library {
     }
 }
 
+// Setup New Library
+const myLibrary = new Library();
+
+// Populate Grid from Library
 function populateGrid(books) {
     const bookGrid = document.querySelector('.book-grid');
 
@@ -62,6 +66,19 @@ function populateGrid(books) {
     
             // Append the new book to the grid
             bookGrid.appendChild(newBook);
+
+            // Add event listener for the read button
+            newBook.querySelector('.read').addEventListener('click', (e) => {
+                const bookTitleElement = newBook.querySelector('p'); 
+                const bookTitle = bookTitleElement.textContent.replace('Title: ', '').trim();
+
+                const book = myLibrary.getBook(bookTitle);
+
+                if (book) {
+                    book.read = !book.read;
+                    e.target.textContent = book.read ? 'Read' : 'Not Read';
+                }
+            });
     
             // Add event listener for the remove button
             newBook.querySelector('.remove').addEventListener('click', (e) => {
@@ -73,10 +90,9 @@ function populateGrid(books) {
         });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Setup New Library
-    const myLibrary = new Library();
 
+
+document.addEventListener('DOMContentLoaded', () => {
     // Get Elements
     var btn = document.querySelector(".add-book"); // Use querySelector to get the first element that matches the selector
     const addBookForm = document.getElementById('addBookForm');
